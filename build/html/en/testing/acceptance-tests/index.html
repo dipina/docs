@@ -1,0 +1,443 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="SW development, CI &amp; CD policies for INTERLINK software" href="../../cicd/index.html" /><link rel="prev" title="Interlinkers integration" href="../../interlinkers/index.html" />
+
+    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/>
+        <title>User Acceptance testing - Interlink documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">Interlink  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">Interlink  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../usermanual/usermanual.html">User manual</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../usermanual/dashboard.html">Dashboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usermanual/catalogue-interlinkers.html">Catalogue of interlinkers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usermanual/coproductionprocess-overview.html">Overview section of a coproduction process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usermanual/coproductionprocess-guide.html">Guide section of a coproduction process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usermanual/coproductionprocess-workplan.html">Workplan section of a coproduction process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usermanual/coproductionprocess-team.html">Team section of a coproduction process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usermanual/coproductionprocess-settings.html">Settings section of a coproduction process</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../environments/index.html">Setup local development environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datamodel/index.html">Data models</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../authentication/authentication.html">Authentication</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../authentication/microservice.html">Auth microservice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../authentication/example.html">Auth flow example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../interlinkers/index.html">Interlinkers integration</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">User Acceptance testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cicd/index.html">SW development, CI &amp; CD policies for INTERLINK software</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="user-acceptance-testing">
+<h1>User Acceptance testing<a class="headerlink" href="#user-acceptance-testing" title="Permalink to this headline">#</a></h1>
+<dl>
+<dt>Acceptance Testing</dt>
+<dd>This is a type of testing done by users, customers, or other authorised entities to determine application/software needs and business processes. Acceptance testing is the most important phase of testing as this decides whether the client approves the application/software or not.</dd>
+</dl>
+<dl>
+<dt>User Acceptance Testing (UAT)</dt>
+<dd>UAT is a type of testing performed by the end user or the client to verify/accept the software system before moving the software application to the production environment. UAT is done in the final phase of testing after functional, integration and system testing is done.</dd>
+</dl>
+<p>This document ilustrates the different tests needed to ensure that the expected functionality, from the end-user’s point of view, of the INTERLINK Collaborative Environment is met. The main Purpose of UAT is to validate end to end business flow. It does not focus on cosmetic errors, spelling mistakes or system testing. User Acceptance Testing is carried out in a separate testing environment with production-like data setup. It is kind of black box testing where two or more end-users will be involved. User acceptance testing is needed for <strong>testing whether the final product is accepted by client/end-user</strong>.</p>
+<section id="smoke-testing">
+<h2>Smoke Testing<a class="headerlink" href="#smoke-testing" title="Permalink to this headline">#</a></h2>
+<p>The first section carries out a so-called <em>Smoke Testing</em></p>
+<dl>
+<dt>Smoke Testing</dt>
+<dd>In computer programming and software testing, smoke testing is preliminary testing to reveal simple failures severe enough to, for example, reject a prospective software release.</dd>
+<dt>Staging server</dt>
+<dd>A server used to temporarily show certain users new and revised Internet and/or intranet pages before they are put into production.</dd>
+</dl>
+<p>The following Smoke Testing should be applied over <a class="reference external" href="https://demo.interlink-project.eu/">INTERLINK’s staging server</a>:</p>
+<ol class="arabic simple" start="0">
+<li><p>Before using the Collaborative environment, you must first login with your google credentials or create your own credentials at <a class="reference external" href="https://demo.interlink-project.eu/">https://demo.interlink-project.eu/</a>, i.e. the staging server of INTERLINK. <strong>IMPORTANT</strong>: All members of an envisaged team must logged into the platform before they can be added to a team. <img alt="Login required screen" src="../../_images/image0.PNG"/> <img alt="AAC screen" src="../../_images/image1.PNG"/></p></li>
+<li><p>Create a team which wants to take part in a co-production process. <img alt="Two user sessions" src="../../_images/image2.PNG"/> <img alt="Creating a team" src="../../_images/image3.png"/> <img alt="Adding a user" src="../../_images/image4.png"/> <img alt="Team editing window" src="../../_images/image5.png"/></p></li>
+<li><p>Create a co-production project where the activity to co-create is assessed <img alt="Creating a new co-production project" src="../../_images/image6.png"/></p></li>
+<li><p>Link the created team to the created co-production process. <img alt='Select Team menu option and "Add new Team" button' src="../../_images/image8.png"/> <img alt="Click on pop-up window's Add team button" src="../../_images/image9.png"/></p></li>
+<li><p>Choose a co-production process guide (flexibility to choose the best fitting schema)</p>
+<ul class="simple">
+<li><p>Notice that there are several co-production trees available. We will take the one named “Default schema” <img alt="Select default schema" src="../../_images/image7.png"/></p></li>
+<li><p>Beware of emergence of Guide view menu item on left hand side <img alt="Beware of emergence of Guide view menu item on left hand side" src="../../_images/image10.png"/></p></li>
+<li><p>You may customize such tree to the specific needs of your co-production process. Currently only DELETE task allowed, soon we will be able to add new objectives &amp; tasks. Check below how a task is removed after having clicked on the PENCIL icon which appears on the right hand side of the task visualization panel.
+<img alt="About to remove a task" src="../../_images/image11.png"/>
+<img alt="View after removal of task" src="../../_images/image12.png"/></p></li>
+<li><p>Observe that specific co-production trees can be defined and, hence, selected (e.g. VARAM case)</p></li>
+<li><p>You may also assign durations to tasks
+<img alt="Assigning duration to task" src="../../_images/image13.png"/></p></li>
+<li><p>Then we can see in WORKPLAN view the time span defined, by clicking on the “Time planification” link in the GUIDE view or clicking on the left hand side menu option named “Workplan”. You may return to the Workplan view, to see the task details by clicking on the name of the task in the WORKPLAN view.
+<img alt="Workplan view" src="../../_images/image14.png"/></p></li>
+</ul>
+</li>
+<li><p>Create new roles and new teams with different rights than the core co-producers’ team. Currently a role applies to all phases, objectives and tasks of a co-production process.</p>
+<ul class="simple">
+<li><p>Create a new team
+<img alt="Creating a new team" src="../../_images/image15.png"/></p></li>
+<li><p>Create a new role, assigning it the right to “View resources” only
+<img alt="Creation of co-observers role" src="../../_images/image16.png"/></p></li>
+<li><p>Assign the role of co-observers to the co-observers team
+<img alt="Assignment of co-observers role to co-observers team" src="../../_images/image17.png"/></p></li>
+</ul>
+</li>
+<li><p>Use the guide to co-produce SOMETHING, e.g. new document to collect feedback of collaboration process. For each of the tasks in the co-production phases you may select any of the recommended INTERLINKERs or instantiate a new one based on the generic software INTERLINKERs available at the bottom of the screen shown when selecting a co-production task.</p>
+<ul class="simple">
+<li><p>Select another task in the GUIDE view, e.g. ENGAGE &gt; Engage Stakeholders &gt; Create awareness and Communication</p></li>
+<li><p>Notice the INTERLINKERs recommended
+<img alt="Notice INTERLINKERs recommended" src="../../_images/image22.png"/></p></li>
+<li><p>Select a task in the GUIDE view, e.g. ENGAGE &gt; Define legal and ethical framework &gt; Define a non-disclosure agreement (NDA)</p></li>
+<li><p>Click on the blue button at the bottom entitled “Initiate Procedure” to give place to a new Google Docs document
+<img alt="Creating a new Google Docs" src="../../_images/image18.png"/></p></li>
+<li><p>Select the type of document to create with the support of Google Drive INTERLINKER
+<img alt="Select and name the Google Docs" src="../../_images/image19.png"/></p></li>
+<li><p>Realize about the new resource that appears at the bottom of the task description panel
+<img alt="New resource created" src="../../_images/image20.png"/></p></li>
+<li><p>Open it in Google Drive by clicking on the newly created resource name
+<img alt="New resource created" src="../../_images/image21.png"/></p></li>
+</ul>
+</li>
+<li><p>Review progress of project in OVERVIEW
+<img alt="Resources created so far" src="../../_images/image22.png"/></p></li>
+<li><p>Check functionality of the INTERLINK catalogue by clicking on INTERLINKERs, browsing, filtering and selecting INTERLINKERs.</p>
+<ul class="simple">
+<li><p>Enter in the catalogue of INTERLINNKERs by clicking on INTERLINKERs top menu
+<img alt="INTERLINKERs catalogue view" src="../../_images/image23.png"/></p></li>
+<li><p>Filter by selecting options on Nature filter
+<img alt="Filtered INTERLINKERs" src="../../_images/image24.png"/></p></li>
+<li><p>Review contents of an INTERLINKER by clicking on its title
+<img alt="Filtered INTERLINKERs" src="../../_images/image26.png"/></p></li>
+<li><p>You main review what it offers by visiting Preview tab
+<img alt="Filtered INTERLINKERs" src="../../_images/image27.png"/></p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="acceptance-testing">
+<h2>Acceptance testing<a class="headerlink" href="#acceptance-testing" title="Permalink to this headline">#</a></h2>
+<p>Next, we will illustrate how to perform a more exhaustive suite of manual tests that expore all currently available functionalities within the Collaborative Environment.</p>
+<p>The steps to validate that the miminum functionalities to allow a collaborative process to be materialized are listed below:</p>
+<ol class="arabic simple" start="0">
+<li><p><strong>Ensure that team members have logged in at least once</strong> at <a class="reference external" href="https://demo.interlink-project.eu/">INTERLINK’s staging server</a></p>
+<ul class="simple">
+<li><p>Ensure that two sessions at least are opened, e.g. one for user user1@deusto.es and another one for user user2@gmail.com, to be able to test the environment’s collaborative features sensibly.</p></li>
+</ul>
+</li>
+<li><p><strong>Create a team</strong> <em>“INTERLINK co-production team for co-evaluation of collaborative environment”</em> which will jointly generate an assessment of the environment and its capabilities to carry out collaborative processes. Add at least 2 members to the team, e.g. user1@deusto.es and user2@gmail.com</p></li>
+<li><p><strong>Create a co-production project</strong>, namely <em>“Co-evaluation of the co-production process”</em></p></li>
+<li><p><strong>Go to Settings</strong> and ensure that the project has a good logo. Click on the pencil icon and then SAVE.</p></li>
+<li><p>Click on <strong>“Team” left hand side</strong> menu and <strong>add the created Team to the project</strong>.</p>
+<ul class="simple">
+<li><p>You can modify the team composition at any time by clicking on the hyperlink of the Team name.</p></li>
+</ul>
+</li>
+<li><p>Click on <strong>“Overview”</strong> and <strong>select the co-production schema</strong> (tree) to use. Choose <em>“Default schema”</em></p></li>
+<li><p>Hit on <strong>“Guide” left hand side menu option</strong> and let’s start as a team co-evaluating the collaborative environment</p></li>
+<li><p><strong>Browse through the different phases</strong> of the co-production guide</p>
+<ul class="simple">
+<li><p>Select different phases</p></li>
+<li><p><strong>Select objectives</strong> within a phase</p></li>
+<li><p><strong>Select tasks</strong> within an objective</p></li>
+<li><p><strong>Observe that different INTERLINKERs are recommeded</strong> for different tasks</p></li>
+</ul>
+</li>
+<li><p><strong>Instantiate a generic INTERLINKER</strong>, where feedback with your observations can be gathered in a shared Google Docs with the rest of the co-evaluators</p>
+<ul class="simple">
+<li><p>In <strong>GUIDE view</strong>, select <em>BUILD &gt; Technical Implementation &gt; Technical implementation</em></p></li>
+<li><p>Hit on <strong>“Initiate Procedure” &gt; “Create a Google Drive document”</strong>, and create a new asset entitled <em>“Feedback about usage of Collaborative Environment”</em></p></li>
+<li><p>Ensure that all team members edit and insert their comments in such shared document</p></li>
+<li><p>Notice that they all could <strong>access to feedback document when clicking on Overview</strong> menu option on the left hand side.</p></li>
+</ul>
+</li>
+<li><p>Explore how to <strong>navigate across the different views</strong> of the Collaborative Environment.</p>
+<ul class="simple">
+<li><p>Explore navigation between “Guide” view and “Workplan” view by hitting on <strong>“Time planification”</strong>, once <strong>within a chosen task</strong></p></li>
+<li><p>Test changing the <strong>Time planification</strong> of a task, by hitting on the <strong>pencil</strong> and selecting start and end period, under the task screen within GUIDE view</p></li>
+<li><p>Explore navigation between “Overview” view and “Guide” view by hitting on <strong>“See Task”</strong></p></li>
+</ul>
+</li>
+<li><p>Use one of the <strong>recommended INTERLINKERs</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>For instance, select <em>“Stakeholders Mapping Canvas”</em> INTERLINKER under task shown when navigating to <em>Engage &gt; Identify Stakeholders</em></p></li>
+<li><p>Click on button “Instantiate as resource to use in the project”</p></li>
+<li><p>Check the newly created resource appears at the bottom of the page under <strong>“Current resources”</strong></p></li>
+<li><p>Open the generated resource in the form of a presentation and add some modifications</p></li>
+</ul>
+<ol class="arabic simple" start="11">
+<li><p>Check that different recommended INTERLINKERs or those generic ones instantiated through <strong>“Initiate Procedure” button</strong> can be started</p></li>
+</ol>
+<ul class="simple">
+<li><p>Continue inspecting the different tasks and INTERLINKERs that are recommended for 5’</p></li>
+<li><p>During the whole process <strong>PLEASE GATHER YOUR IMPRESSIONS / FEEDBACK on the shared document entitled “Feedback about usage of Collaborative Environment”</strong></p></li>
+<li><p>Remember that from <strong>OVERVIEW</strong>, you can simply click on the resource title to be able to open it.</p></li>
+</ul>
+<ol class="arabic simple" start="12">
+<li><p>In order to <strong>provide direct feedback</strong> on any mistakes, bugs requested please use the following two channels:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Fill in the <strong><a class="reference external" href="https://docs.google.com/forms/d/e/1FAIpQLSei2Iful343wNa3WMwS4di4Z_cqzv0ibuFf_I41hIrUm1pUVA/viewform">ALPHA QUESTIONNAIRE</a> of INTERLINK</strong>.</p></li>
+<li><p>Access to the <strong><a class="reference external" href="http://redmine.interlink-project.eu/">Redmine support channel</a></strong>, log in and create a new issue under <a class="reference external" href="http://redmine.interlink-project.eu/projects/proj_wp4_platform">proj_wp4_PLATFORM</a></p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../../cicd/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">SW development, CI &amp; CD policies for INTERLINK software</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../../interlinkers/index.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Interlinkers integration</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, Interlink team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">User Acceptance testing</a><ul>
+<li><a class="reference internal" href="#smoke-testing">Smoke Testing</a></li>
+<li><a class="reference internal" href="#acceptance-testing">Acceptance testing</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/scripts/furo.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    </body>
+</html>

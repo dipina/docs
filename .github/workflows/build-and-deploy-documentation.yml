@@ -1,0 +1,40 @@
+name: Generate documentation and deploy to dev environment
+on:
+  push:
+    branches:
+      - "master"
+  
+jobs:
+  build-and-deploy:
+    # Ensures that only one deploy task per branch/environment will run at a time.
+    concurrency:
+      group: environment-${{ github.ref }}
+      cancel-in-progress: true
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Install and Build
+        id: build
+        run: |
+          cd docs && pip3 install -r requirements.txt && make update
+          echo ::set-output name=exit_code::$?
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Auto changes
+          file_pattern: docs/**
+          
+      - name: Deploy Dev SSH
+        uses: appleboy/ssh-action@master
+        if: steps.build.outputs.exit_code == 0
+        with:
+          host: ${{ secrets.DEV_HOST }}
+          username: ${{ secrets.DEV_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            git clone https://github.com/interlink-project/docs.git /datadrive/data/docs || (cd /datadrive/data/docs && git pull --ff-only)
+            cd /datadrive/data/docs
+            docker-compose up -d
