@@ -19,7 +19,7 @@ jobs:
       - name: Install and Build
         id: build
         run: |
-          cd docs && pip3 install -r requirements.txt && make update
+          pip3 install -r requirements.txt && make update
           echo ::set-output name=exit_code::$?
 
       - uses: stefanzweifel/git-auto-commit-action@v4
