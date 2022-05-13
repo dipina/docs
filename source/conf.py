@@ -62,5 +62,3 @@ source_suffix = {
 
 locale_dirs = ['locale/']   # path is example but recommended.
 gettext_compact = "docs"
-
-html_baseurl = os.getenv("BASE_URL", None)
